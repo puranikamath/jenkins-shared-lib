@@ -1,23 +1,32 @@
 @Library('library-demo') _
 
-import com.samplebuilder.GlobalVars
-import com.samplebuilder.SampleClass
 
 pipeline {
     agent any
     stages {
-        stage('Demo') {
+        // stage('Demo') {
+        //     steps {
+        //         echo 'Executing a shared lib function'
+        //         sayHello 'Devops'
+
+        //     }
+        // }
+        stage('Checkout') {
             steps {
-                echo 'Hello, world'
-                sayHello 'Dave'
-
-                echo 'The value of foo is : ' + GlobalVars.foo
-
                 script {
-                    def person = new SampleClass()
-                    person.age = 21
-                    person.increaseAge(10)
-                    echo 'Incremented age, is now : ' + person.age
+                    sh("""
+                       rm -rf hello-world-war
+                       git clone https://github.com/Tejasks16/hello-world-war.git
+                       ls -ltr
+                    """)
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    build 'install'
                 }
             }
         }
