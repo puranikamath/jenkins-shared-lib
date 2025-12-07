@@ -16,7 +16,7 @@ pipeline {
                 script {
                     sh("""
                        rm -rf hello-world-war
-                       git clone https://github.com/Tejasks16/hello-world-war.git
+                       git clone https://github.com/puranikamath/hello-world-war.git
                        ls -ltr
                     """)
                 }
